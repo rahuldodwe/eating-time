@@ -11,8 +11,11 @@ import logo from "../../assets/images/dinetimelogo.png";
 import frame from "../../assets/images/Frame.png";
 import { Formik } from "formik";
 import { TextInput } from "react-native";
+import validationSchema from "../../utils/authSchema";
+import { useRouter } from "expo-router";
 
 const Signup = () => {
+  const router = useRouter();
   const handleSignup = () => {};
   return (
     <SafeAreaView className={`bg-[#2b2b2b]`}>
@@ -23,11 +26,10 @@ const Signup = () => {
           <Text className="text-lg text-center text-white font-bold mb-10">
             Let's get you started
           </Text>
-
           <View className="w-5/6">
             <Formik
               initialValues={{ email: "", password: "" }}
-              validationSchema={""}
+              validationSchema={validationSchema}
               onSubmit={handleSignup}
             >
               {({
@@ -36,8 +38,7 @@ const Signup = () => {
                 touched,
                 handleChange,
                 handleBlur,
-                handleSubmit,
-                isSubmitting,
+                handleSubmit
               }) => (
                 <View className="w-full">
                   <Text className="text-[#f49b33] mt-4 mb-2">Email</Text>
@@ -81,9 +82,32 @@ const Signup = () => {
                 </View>
               )}
             </Formik>
+            <View>
+            <TouchableOpacity
+              className="flex flex-row justify-center items-center mt-5 p-2"
+              onPress={() => router.push("/signin")}
+            >
+              <Text className="text-white font-semibold">Already a User? {" "}</Text>
+              <Text className="text-base font-semibold underline text-[#f49b33] text-center">
+                Sign In
+              </Text>
+            </TouchableOpacity>
+            <Text className="text-center text-lg font-semibold my-4 text-white">
+              <View className="border-b-2 border-[#f49b33] p-2 mb-1 w-24" /> or{" "}
+              <View className="border-b-2 border-[#f49b33] p-2 mb-1 w-24" />
+            </Text>
+            <TouchableOpacity
+              className="flex flex-row justify-center items-center mb-5 p-2"
+              onPress={() => router.push("/home")}
+            >
+              <Text className="text-white font-semibold">Be a{"  "}</Text>
+              <Text className="text-base font-semibold underline text-[#f49b33] text-center">
+                Guest User
+              </Text>
+            </TouchableOpacity>
+            </View>
           </View>
         </View>
-
         <View className="flex-1">
           <Image
             source={frame}
